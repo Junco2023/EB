@@ -13,20 +13,28 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public class CatalogoData {
     //Especie especie;
     Connection conexion;
     String msj=null;String sql="";
+    public int  totalRegistros;
     public CatalogoData(){
         conexion=Conexion.getConexion();
     }
     
-    public void mostrarCatalogo(String c){
-       int nuevo=1;String d="";
+    public DefaultTableModel mostrarCatalogo(String c){
+       DefaultTableModel modelo;
+       String [] titulos = {};
+       String [] registros = new String [2];
+       totalRegistros = 0;
+       modelo= new DefaultTableModel(null,titulos);
        
+       String sql="";
        
+       return null;
     }
     
     public void guardarCatalogo(Catalogo catalogo){
