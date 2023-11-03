@@ -24,7 +24,7 @@ public class CatalogoData {
     }
     
     public void mostrarCatalogo(String c){
-        DefaultTableModel
+        //DefaultTableModel
     }
     
     public void guardarCatalogo(Catalogo catalogo){
