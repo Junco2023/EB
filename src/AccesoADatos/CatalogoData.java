@@ -24,7 +24,9 @@ public class CatalogoData {
     }
     
     public void mostrarCatalogo(String c){
-       int nuevo=1;
+       int nuevo=1;String d="";
+       
+       
     }
     
     public void guardarCatalogo(Catalogo catalogo){
