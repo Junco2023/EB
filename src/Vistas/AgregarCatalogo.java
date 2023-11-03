@@ -9,6 +9,7 @@ import AccesoADatos.CatalogoData;
 import Entidades.Catalogo;
 import Entidades.Especie;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,6 +24,7 @@ private CatalogoData CD;
     public AgregarCatalogo(CatalogoData cd) {
         this.CD=cd;
         initComponents();
+        mostrar();
     }
 
     /**
@@ -60,6 +62,7 @@ private CatalogoData CD;
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaCatalogo = new javax.swing.JTable();
+        jlRegistros = new javax.swing.JLabel();
 
         jLabel1.setText("Agregar Catalogo");
 
@@ -201,21 +204,30 @@ private CatalogoData CD;
         ));
         jScrollPane1.setViewportView(TablaCatalogo);
 
+        jlRegistros.setText("Total Registros :");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(260, 260, 260)
+                        .addComponent(jlRegistros)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jlRegistros)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -247,6 +259,21 @@ private CatalogoData CD;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    private void mostrar (){
+     DefaultTableModel modelo;
+     
+        CatalogoData cd=new CatalogoData();
+        modelo= (cd.mostrarCatalogo(""));
+        
+        TablaCatalogo.setModel(modelo);
+        jlRegistros.setText("Total Registros : "+cd.totalRegistros.toString());
+    
+}
+    
+   
+    
+    
     private void jtStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtStockActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtStockActionPerformed
@@ -292,6 +319,7 @@ JOptionPane.showMessageDialog(null,"Guardado");
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbSalir;
+    private javax.swing.JLabel jlRegistros;
     private javax.swing.JTextField jtEspecie;
     private javax.swing.JTextField jtMac;
     private javax.swing.JTextField jtNombre;

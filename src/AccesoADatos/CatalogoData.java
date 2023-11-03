@@ -20,23 +20,53 @@ public class CatalogoData {
     //Especie especie;
     Connection conexion;
     String msj=null;String sql="";
-    public int  totalRegistros;
+    public Integer  totalRegistros;
     public CatalogoData(){
         conexion=Conexion.getConexion();
     }
     
     public DefaultTableModel mostrarCatalogo(String c){
-       DefaultTableModel modelo;
-       String [] titulos = {};
-       String [] registros = new String [2];
-       totalRegistros = 0;
-       modelo= new DefaultTableModel(null,titulos);
-       
-       String sql="dasdasd";
-       
-       return null;
+        
+        
+            DefaultTableModel modelo;
+            String [] titulos = {"ID","Especie","Nombre","Variedad","Mac","Stock","Precio","Peso"};
+            String [] registros = new String [8];
+            totalRegistros = 0;
+            modelo= new DefaultTableModel(null,titulos){
+                public boolean idCellEditable(int f,int c){
+                    return false;
+                }
+            };
+         try {  
+            String sql="SELECT * FROM catalogo";
+            Statement st=conexion.createStatement();
+            ResultSet rs=st.executeQuery(sql);
+            
+            while(rs.next()){
+            registros [0]=rs.getString("id_Catalogo");
+            registros [1]=rs.getString("especie");
+            registros [2]=rs.getString("nombre");
+            registros [3]=rs.getString("var");
+            registros [4]=rs.getString("mac");
+            registros [5]=rs.getString("stock");
+            registros [6]=rs.getString("precio");
+            registros [7]=rs.getString("peso");
+            
+            totalRegistros=totalRegistros+1;
+            modelo.addRow(registros);
+            }
+            return modelo;
+        } catch (SQLException ex) {
+        msj="Error en metodo mostrarCatalogo/CatalogoData/linea 28 . "+ex.getMessage();
+            mensaje(msj);
+        return null;
+        }
+         
     }
     
+    public boolean isCellEditable(int f ,int c){
+         return false;   
+        }
     public void guardarCatalogo(Catalogo catalogo){
         //funciona
         try {
