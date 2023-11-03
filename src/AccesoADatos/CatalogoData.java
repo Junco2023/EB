@@ -32,7 +32,7 @@ public class CatalogoData {
        totalRegistros = 0;
        modelo= new DefaultTableModel(null,titulos);
        
-       String sql="";
+       String sql="dasdasd";
        
        return null;
     }
