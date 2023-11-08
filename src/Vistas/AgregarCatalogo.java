@@ -41,7 +41,6 @@ private CatalogoData CD;
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jtEspecie = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jtVar = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -59,6 +58,9 @@ private CatalogoData CD;
         jButton1 = new javax.swing.JButton();
         jbModificar = new javax.swing.JButton();
         jbBuscar = new javax.swing.JButton();
+        jcbEspecie = new javax.swing.JComboBox<>();
+        jlId = new javax.swing.JLabel();
+        jtId = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaCatalogo = new javax.swing.JTable();
@@ -67,12 +69,6 @@ private CatalogoData CD;
         jLabel1.setText("Agregar Catalogo");
 
         jLabel2.setText("Especie");
-
-        jtEspecie.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtEspecieActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Nombre");
 
@@ -102,10 +98,29 @@ private CatalogoData CD;
         jbSalir.setText("Salir");
 
         jButton1.setText("Eliminar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jbModificar.setText("Modificar");
+        jbModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarActionPerformed(evt);
+            }
+        });
 
         jbBuscar.setText("Buscar");
+
+        jcbEspecie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Brocchinia", "Dionaea", "Drosera", "Nepenthes", "Pinguicula", "Sarracenia", "Stylidium", "Utricularia" }));
+        jcbEspecie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbEspecieActionPerformed(evt);
+            }
+        });
+
+        jlId.setText("ID");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -114,41 +129,49 @@ private CatalogoData CD;
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jbGuardar)
+                    .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel2))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jtMac, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(29, 29, 29)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel6))
-                            .addGap(39, 39, 39)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(87, 87, 87)
-                                    .addComponent(jLabel7)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel8))
-                                .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(40, 40, 40)
-                            .addComponent(jLabel4)
-                            .addGap(19, 19, 19)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtVar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(1, 1, 1)
-                            .addComponent(jbBuscar))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jlId)
+                        .addComponent(jLabel5)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtMac, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                            .addComponent(jcbEspecie, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(75, 75, 75)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel6)))
+                    .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jbBuscar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbGuardar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(87, 87, 87)
+                                .addComponent(jLabel7)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(jLabel4)
+                                .addGap(19, 19, 19))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtVar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jbModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -159,15 +182,20 @@ private CatalogoData CD;
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jtEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jtVar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(jtVar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jcbEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jtMac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -181,7 +209,9 @@ private CatalogoData CD;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbBuscar)
                     .addComponent(jbSalir)
-                    .addComponent(jbGuardar))
+                    .addComponent(jbGuardar)
+                    .addComponent(jlId)
+                    .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(80, 80, 80))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -202,6 +232,11 @@ private CatalogoData CD;
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        TablaCatalogo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaCatalogoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TablaCatalogo);
 
         jlRegistros.setText("Total Registros :");
@@ -218,7 +253,7 @@ private CatalogoData CD;
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(260, 260, 260)
                         .addComponent(jlRegistros)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,23 +315,89 @@ private CatalogoData CD;
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
-Especie especie = Especie.valueOf(jtEspecie.getText());
+try{
+Especie especie = Especie.valueOf(jcbEspecie.getSelectedItem().toString());
 String nombre = jtNombre.getText();
 String var = jtVar.getText();
-double mac= Integer.parseInt(jtMac.getText());
-Integer stock=Integer.parseInt(jtStock.getText());
-Integer precio=Integer.parseInt(jtPrecio.getText());
-Integer peso=Integer.parseInt(jtPeso.getText());
+double mac= Double.parseDouble(jtMac.getText());
+int stock=(int)Integer.parseInt(jtStock.getText());
+double precio=Double.parseDouble(jtPrecio.getText());
+double peso=Double.parseDouble(jtPeso.getText());
 
 Catalogo c = new Catalogo(especie,nombre,var,mac,stock,precio,peso);
 
 CD.guardarCatalogo(c);
 JOptionPane.showMessageDialog(null,"Guardado");
+mostrar();
+}catch(Exception e){
+    JOptionPane.showMessageDialog(null,"Error al agregar Catalogo ."+e.getMessage());
+}
+
     }//GEN-LAST:event_jbGuardarActionPerformed
 
-    private void jtEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtEspecieActionPerformed
+    private void TablaCatalogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCatalogoMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtEspecieActionPerformed
+
+          int fila=TablaCatalogo.rowAtPoint(evt.getPoint());
+          
+          jtId.setText(TablaCatalogo.getValueAt(fila, 0).toString());
+          jcbEspecie.setSelectedItem(TablaCatalogo.getValueAt(fila, 1).toString());
+          jtNombre.setText(TablaCatalogo.getValueAt(fila, 2).toString());
+          jtVar.setText(TablaCatalogo.getValueAt(fila, 3).toString());
+          jtMac.setText(TablaCatalogo.getValueAt(fila, 4).toString());
+          jtStock.setText(TablaCatalogo.getValueAt(fila, 5).toString());
+          jtPrecio.setText(TablaCatalogo.getValueAt(fila, 6).toString());
+          jtPeso.setText(TablaCatalogo.getValueAt(fila, 7).toString());
+          
+
+    }//GEN-LAST:event_TablaCatalogoMouseClicked
+
+    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
+        // TODO add your handling code here:
+    try{
+    int id =(int)Integer.parseInt(jtId.getText());
+    String especie=(jcbEspecie.getSelectedItem().toString());
+    String nombre =jtNombre.getText();
+    String var = jtVar.getText();
+    double mac=Double.parseDouble(jtMac.getText());
+    int stock=(int)Integer.parseInt(jtStock.getText());
+    double precio=Double.parseDouble(jtPrecio.getText());
+    double peso=Double.parseDouble(jtPeso.getText());
+    
+    Catalogo c =new Catalogo(id,Especie.valueOf(especie),nombre,var,mac,stock,precio,peso); 
+    for(Catalogo cat:CD.listarCatalogo()){
+    if(cat.getIdCatalogo()==id){
+        CD.modificar(c);
+        JOptionPane.showMessageDialog(this, "Catalogo Modificado");
+        
+    }
+    mostrar();
+    }
+    
+    }catch(Exception e){
+        JOptionPane.showMessageDialog(null,"Error al mopdificar .L 345 ."+e.getMessage());
+    }
+        
+    }//GEN-LAST:event_jbModificarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+        try{
+            int id=(int)Integer.parseInt(jtId.getText());
+           int confirmar = JOptionPane.showConfirmDialog(this, id, "¿Quieres Eliminar el Catalogo Definitivamente ?", 2);
+         if(confirmar==0){   
+           CD.eliminarCatalogoDefinitivo(id);
+           JOptionPane.showMessageDialog(this, "Catalogo "+id+"Eliminado");
+        }
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(this, "Error al eliminar . L 376 ."+e.getMessage());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jcbEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEspecieActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbEspecieActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -319,8 +420,10 @@ JOptionPane.showMessageDialog(null,"Guardado");
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbSalir;
+    private javax.swing.JComboBox<String> jcbEspecie;
+    private javax.swing.JLabel jlId;
     private javax.swing.JLabel jlRegistros;
-    private javax.swing.JTextField jtEspecie;
+    private javax.swing.JTextField jtId;
     private javax.swing.JTextField jtMac;
     private javax.swing.JTextField jtNombre;
     private javax.swing.JTextField jtPeso;

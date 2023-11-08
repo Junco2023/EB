@@ -32,11 +32,11 @@ public class CatalogoData {
             String [] titulos = {"ID","Especie","Nombre","Variedad","Mac","Stock","Precio","Peso"};
             String [] registros = new String [8];
             totalRegistros = 0;
-            modelo= new DefaultTableModel(null,titulos){
-                public boolean idCellEditable(int f,int c){
-                    return false;
-                }
-            };
+            modelo= new DefaultTableModel(null,titulos);
+//                public boolean idCellEditable(int f,int c){
+//                    return false;
+//                }
+//            };
          try {  
             String sql="SELECT * FROM catalogo";
             Statement st=conexion.createStatement();
@@ -93,8 +93,23 @@ public class CatalogoData {
         }
         
     }
+    public void elimniarCatalogo(int id){
+       sql=" UPDATE catalogo SET stock=0 WHERE idCatalogo=?";
+
+        try{
+        PreparedStatement PS=conexion.prepareStatement(sql);
+        PS.setInt(1, id);
+        int fila= PS.executeUpdate();
+        if(fila==1){
+        JOptionPane.showMessageDialog(null, "Catalogo"+id +" Eliminado");
+        }
+        PS.close();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error al eliminar Catalogo"+id +e.getMessage());
+        }
+    }
     
-    public void eliminarCatalogo(int id){
+    public void eliminarCatalogoDefinitivo(int id){
         try {
             sql="DELETE FROM catalogo WHERE catalogo.id_catalogo= ?";
             PreparedStatement ps = conexion.prepareStatement(sql);
@@ -113,7 +128,7 @@ public class CatalogoData {
     public void modificar(Catalogo catalogo){
         try {
             sql="UPDATE catalogo SET id_catalogo=? especie=?,nombre=?,var=?,mac=?',stock=?,precio=?,peso=?"
-                    + "WHERE catalogo.id_catalogo=6";
+                    + "WHERE catalogo.id_catalogo=?";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1,catalogo.getIdCatalogo());
             ps.setString(2, catalogo.getEspecie()+"");
@@ -123,8 +138,9 @@ public class CatalogoData {
             ps.setInt(6,catalogo.getStock());
             ps.setDouble(7, catalogo.getPrecio());
             ps.setDouble(8, catalogo.getPeso());
+            ps.setInt(9, catalogo.getIdCatalogo());
         } catch (SQLException ex) {
-        msj="Error al modificar catalogo "+catalogo.getIdCatalogo();    
+        msj="Error al modificar catalogo en CatalogoData"+catalogo.getIdCatalogo();    
         mensaje(msj);  
         }
     }
