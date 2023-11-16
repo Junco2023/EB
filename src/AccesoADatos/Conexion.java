@@ -23,12 +23,13 @@ public class Conexion {
             try {
                 Class.forName(driver);
                 conexion=DriverManager.getConnection(url+DE,root,password);
+                JOptionPane.showMessageDialog(null,"Conectado");
             } catch (ClassNotFoundException ex) {
                 JOptionPane.showMessageDialog(null,"Driver no conectado");
             } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Base de datos no encontrada");            }      
             } 
-        JOptionPane.showMessageDialog(null,"Conectado");
+        
         return conexion ;
     }
 }

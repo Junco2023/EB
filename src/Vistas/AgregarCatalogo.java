@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vistas;
 
 import AccesoADatos.CatalogoData;
@@ -25,6 +21,7 @@ private CatalogoData CD;
         this.CD=cd;
         initComponents();
         mostrar();
+        buscar();
     }
 
     /**
@@ -57,10 +54,11 @@ private CatalogoData CD;
         jbSalir = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jbModificar = new javax.swing.JButton();
-        jbBuscar = new javax.swing.JButton();
         jcbEspecie = new javax.swing.JComboBox<>();
         jlId = new javax.swing.JLabel();
         jtId = new javax.swing.JTextField();
+        jrbBuscar = new javax.swing.JRadioButton();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaCatalogo = new javax.swing.JTable();
@@ -111,9 +109,7 @@ private CatalogoData CD;
             }
         });
 
-        jbBuscar.setText("Buscar");
-
-        jcbEspecie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Brocchinia", "Dionaea", "Drosera", "Nepenthes", "Pinguicula", "Sarracenia", "Stylidium", "Utricularia" }));
+        jcbEspecie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Brocchinia", "Dionaea", "Drosera", "Nepenthes", "Pinguicula", "Sarracenia", "Stylidium", "Utricularia" }));
         jcbEspecie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbEspecieActionPerformed(evt);
@@ -121,6 +117,20 @@ private CatalogoData CD;
         });
 
         jlId.setText("ID");
+
+        jrbBuscar.setText("Buscar");
+        jrbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbBuscarActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Limpiar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -144,21 +154,23 @@ private CatalogoData CD;
                             .addComponent(jLabel3)
                             .addComponent(jLabel6)))
                     .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jbBuscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbGuardar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jrbBuscar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jbGuardar)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(87, 87, 87)
-                                .addComponent(jLabel7)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton2)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(40, 40, 40)
@@ -171,7 +183,7 @@ private CatalogoData CD;
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtVar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 173, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jbModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -207,11 +219,12 @@ private CatalogoData CD;
                     .addComponent(jtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbBuscar)
                     .addComponent(jbSalir)
                     .addComponent(jbGuardar)
                     .addComponent(jlId)
-                    .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jrbBuscar)
+                    .addComponent(jButton2))
                 .addGap(80, 80, 80))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -253,7 +266,7 @@ private CatalogoData CD;
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(260, 260, 260)
                         .addComponent(jlRegistros)))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,7 +291,7 @@ private CatalogoData CD;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -393,16 +406,48 @@ mostrar();
         }catch(Exception e){
             JOptionPane.showConfirmDialog(this, "Error al eliminar . L 376 ."+e.getMessage());
         }
+        mostrar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jcbEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEspecieActionPerformed
         // TODO add your handling code here:
+     if(jrbBuscar.isSelected()==true && jcbEspecie.getSelectedItem().toString()!= "Seleccionar"){
+         buscar();
+     }
     }//GEN-LAST:event_jcbEspecieActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jrbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbBuscarActionPerformed
+        // TODO add your handling code here:
+   buscar();
+    
+   
+//    int id =(int)Integer.parseInt(jtId.getText());
+//    String especie=(jcbEspecie.getSelectedItem().toString());
+//    String nombre =jtNombre.getText();
+//    String var = jtVar.getText();
+//    double mac=Double.parseDouble(jtMac.getText());
+//    int stock=(int)Integer.parseInt(jtStock.getText());
+//    double precio=Double.parseDouble(jtPrecio.getText());
+//    double peso=Double.parseDouble(jtPeso.getText());
+    
+    //Catalogo cat=new Catalogo(id,Especie.valueOf(especie),nombre,var,mac,stock,precio,peso);
+   // CD.filtrar(filtro);
+        
+        //}
+
+    }//GEN-LAST:event_jrbBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaCatalogo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -416,13 +461,13 @@ mostrar();
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<String> jcbEspecie;
     private javax.swing.JLabel jlId;
     private javax.swing.JLabel jlRegistros;
+    private javax.swing.JRadioButton jrbBuscar;
     private javax.swing.JTextField jtId;
     private javax.swing.JTextField jtMac;
     private javax.swing.JTextField jtNombre;
@@ -431,4 +476,34 @@ mostrar();
     private javax.swing.JTextField jtStock;
     private javax.swing.JTextField jtVar;
     // End of variables declaration//GEN-END:variables
+
+public void limpiar(){
+    jtId.setText("");
+    jcbEspecie.setSelectedItem("Seleccionar");
+    jtNombre.setText("");
+    jtVar.setText("");
+    jtMac.setText("");
+    jtStock.setText("");
+    jtPrecio.setText("");
+    jtPeso.setText("");
+    
+}
+
+private void buscar(){
+    String [] f=new String [8];
+    if(jrbBuscar.isSelected()==true){
+    f[0]=(jtId.getText());
+    f[1]=(jcbEspecie.getSelectedItem().toString());
+    f[2]=jtNombre.getText();
+    f[3]=jtVar.getText();
+    f[4]=(jtMac.getText());
+    f[5]=(jtStock.getText());
+    f[6]=(jtPrecio.getText());
+    f[7]=(jtPeso.getText());
+    
+    CD.filtrar(f);
+    }
+}
+
+
 }

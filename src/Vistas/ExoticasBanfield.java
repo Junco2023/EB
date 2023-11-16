@@ -7,6 +7,8 @@ package Vistas;
 
 import AccesoADatos.CatalogoData;
 import Vistas.AgregarCatalogo;
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
 /**
  *
  * @author matias
@@ -66,6 +68,8 @@ private ListadoCatalogo listadoCat ;
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
         Panel = new javax.swing.JPanel();
+        PanelPrincipal = new javax.swing.JPanel();
+        jbCliente = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -143,15 +147,41 @@ private ListadoCatalogo listadoCat ;
 
         jScrollPane1.setViewportView(jTextPane1);
 
+        javax.swing.GroupLayout PanelPrincipalLayout = new javax.swing.GroupLayout(PanelPrincipal);
+        PanelPrincipal.setLayout(PanelPrincipalLayout);
+        PanelPrincipalLayout.setHorizontalGroup(
+            PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 989, Short.MAX_VALUE)
+        );
+        PanelPrincipalLayout.setVerticalGroup(
+            PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jbCliente.setText("Cliente");
+        jbCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbClienteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelLayout = new javax.swing.GroupLayout(Panel);
         Panel.setLayout(PanelLayout);
         PanelLayout.setHorizontalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1133, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jbCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
+                .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         PanelLayout.setVerticalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 487, Short.MAX_VALUE)
+            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(PanelLayout.createSequentialGroup()
+                .addGap(156, 156, 156)
+                .addComponent(jbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(295, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Catalogo");
@@ -235,6 +265,17 @@ private ListadoCatalogo listadoCat ;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void showPanel(JPanel p){
+    
+        p.setSize(1152, 800);
+        p.setLocation(0, 0);
+        PanelPrincipal.removeAll();
+        PanelPrincipal.repaint();
+
+        PanelPrincipal.add(p, BorderLayout.CENTER);
+        PanelPrincipal.revalidate();
+}
+    
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem7ActionPerformed
@@ -262,6 +303,12 @@ Panel.removeAll();Panel.repaint();listadoCat.setVisible(true);
 Panel.add(listadoCat);listadoCat.moveToFront();
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jbClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbClienteActionPerformed
+        // TODO add your handling code here:
+ClienteVista cv=new ClienteVista();
+        showPanel(cv);
+    }//GEN-LAST:event_jbClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -300,6 +347,7 @@ Panel.add(listadoCat);listadoCat.moveToFront();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panel;
+    private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
     private javax.swing.JMenu jMenu1;
@@ -343,5 +391,6 @@ Panel.add(listadoCat);listadoCat.moveToFront();
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JButton jbCliente;
     // End of variables declaration//GEN-END:variables
 }
