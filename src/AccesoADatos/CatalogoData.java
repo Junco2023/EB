@@ -76,7 +76,7 @@ public class CatalogoData {
 //                }
 //            };
          String coma=" , ";
-         String sql="SELECT * FROM catalogo WHEREere ";
+         String sql="SELECT * FROM catalogo WHERE ";
          String sql1=" id_Catalogo="+f[0];
          String sql2=" especie="+f[1];
          String sql3=" nombre="+f[2];

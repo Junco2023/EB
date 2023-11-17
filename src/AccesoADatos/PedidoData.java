@@ -14,13 +14,15 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public class PedidoData {
  Catalogo catalago;
  Cliente cliente ;
  Connection conexion;
-
+public Integer totalRegistros;
+String sql ,msj;
 ArrayList <Catalogo>cat = new ArrayList<>(); 
  public PedidoData () {
      conexion=Conexion.getConexion();
@@ -61,9 +63,46 @@ ArrayList <Catalogo>cat = new ArrayList<>();
  
  } 
  
+ public DefaultTableModel mostrarPedido(String dato){
+
+         DefaultTableModel modelo;
+         totalRegistros=0;
+         String []titulos={"Id","Cliente","Catalogo","Pago","Entrega","Empresa","Opcion","Seguimiento","Despacho","Recibido","Celular","Pago","Anotaciones"};
+         String []registros =new String[14];
+         modelo= new DefaultTableModel(null,titulos);
+         sql="SELECT * FROM pedidos";
+    try {    
+         Statement st =conexion.createStatement();
+         ResultSet rs=st.executeQuery(sql);
+         
+         while(rs.next()){
+         registros[0]=rs.getString("id_pedido");
+         registros[1]=rs.getString("fecha");
+         registros[2]=rs.getString("id_cliente");
+         registros[3]=rs.getString("id_Catalogo");
+         registros[4]=rs.getString("metodoDePago");
+         registros[5]=rs.getString("entrega");
+         registros[6]=rs.getString("empresa");
+         registros[7]=rs.getString("opcion");
+         registros[8]=rs.getString("seguimiento");
+         registros[9]=rs.getString("despacho");
+         registros[10]=rs.getString("recibido");
+         registros[11]=rs.getString("tel");
+         registros[12]=rs.getString("pago");
+         registros[13]=rs.getString("anotaciones");
+
+         totalRegistros=totalRegistros+1;
+         modelo.addRow(registros);
+             
+         }
+         return modelo;
+     } catch (SQLException ex) {
+msj="Error al mostrar Tabla Pedidos /PedidoData/mostrarPedido.  "+ex.getMessage();
+msj(msj);
+return null;
+     }
  
- 
- 
+ }
  
 public void msj(String m){
 JOptionPane.showMessageDialog(null,m);    

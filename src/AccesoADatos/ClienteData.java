@@ -11,11 +11,12 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class ClienteData {
     Cliente cliente; 
     Connection conexion;
-    
+    public Integer totalRegistros;
     String msj;String sql;
     
  public ClienteData(){
@@ -70,7 +71,40 @@ public class ClienteData {
      
  }   
     
-    
+    public DefaultTableModel mostrarCliente(String dato){
+            totalRegistros=0;
+            DefaultTableModel modelo;
+            String [] titulo = {"Id","Nombre","Apellido","Localidad","Provincia","Direccion","CP","DNI","Telefono"};
+            String [] registros = new String [9];
+            modelo=new DefaultTableModel(null,titulo);
+            
+            sql="SELECT * FROM cliente";
+        try {    
+            Statement st=conexion.createStatement();
+            ResultSet rs= st.executeQuery(sql);
+            
+            while (rs.next()){
+                registros[0]=rs.getString("id_cliente");
+                registros[1]=rs.getString("nombre");
+                registros[2]=rs.getString("apellido");
+                registros[3]=rs.getString("localidad");
+                registros[4]=rs.getString("provincia");
+                registros[5]=rs.getString("direccion");
+                registros[6]=rs.getString("cp");
+                registros[7]=rs.getString("dni");
+                registros[8]=rs.getString("telefono");
+             totalRegistros=totalRegistros+1;
+             modelo.addRow(registros);
+         }
+            return modelo;
+   
+        } catch (SQLException ex) {
+        String m = " Erros al Cargar Table.ClienteData/Mostrar.  ";
+        mensaje(m+ex.getMessage());
+        return null;
+        }
+        
+    }
     
  public void mensaje(String msj){
      JOptionPane.showMessageDialog(null, msj);
